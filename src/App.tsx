@@ -1,35 +1,51 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { NavBar } from './components/NavBar';
+import { Routes, Route } from 'react-router-dom';
+import { NotFound } from './pages/NotFound';
+import { HomePage } from './pages/HomePage';
+import { Bets } from './pages/Bets';
+import { ModalProvider } from './Context/ModalContext';
+import { Modal } from './components/Modal';
+import { UserProvider } from './Context/AppContext';
+import { EventsProvider } from './Context/EventsContext';
+import { Rankings } from './components/Menu/Rankings';
+import { FAQ } from './pages/FAQ';
+import { UfcSchedule } from './components/Menu/UfcSchedule';
 
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
-
-export default App
+export const App = () => {
+	return (
+		<ModalProvider>
+			<EventsProvider>
+				<UserProvider>
+					<Modal />
+					<NavBar />
+					<Routes>
+						<Route
+							index
+							element={<HomePage />}
+						/>
+						<Route
+							path='bets'
+							element={<Bets />}
+						/>
+						<Route
+							path='rankings'
+							element={<Rankings />}
+						/>
+						<Route
+							path='schedule'
+							element={<UfcSchedule />}
+						/>
+						<Route
+							path='faq'
+							element={<FAQ />}
+						/>
+						<Route
+							path='*'
+							element={<NotFound />}
+						/>
+					</Routes>
+				</UserProvider>
+			</EventsProvider>
+		</ModalProvider>
+	);
+};

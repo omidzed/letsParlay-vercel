@@ -1,68 +1,124 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
+/* stylelint-disable media-feature-range-notation */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 body {
   margin: 0;
+  background-color: #0f0f0f;
+  font-family: Play, sans-serif;
+  font-weight: 300;
+  font-size: 2rem;
+  color: white;
+}
+
+.closed {
+  transform: translateX(-325px);
+}
+
+.open {
+  transform: translateX(0) translateY(-30px);
+}
+
+.hidden {
+  display: none;
+}
+
+input::placeholder {
+  color: #5a5a5a;
+  opacity: 1;
+}
+
+.event-indicator {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: black;
+  margin: auto;
+}
+
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.menu-item-enter {
+  animation: slideInFromLeft 0.15s ease-out forwards;
+}
+
+.gradient-hover {
+  background: black; /* Initial background */
+  transition: background 0.3s ease-out, transform 0.3s ease-out;
+  border-radius: 9999px; /* Tailwind's rounded-full */
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  gap: 0.5rem; /* Equivalent to Tailwind's gap-2 */
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.gradient-hover:hover {
+  background: linear-gradient(
+    0.3turn,
+    black,
+    black,
+    black,
+    black,
+    black,
+    black,
+    black,
+    black,
+    rgb(96, 96, 64),
+    rgb(163, 163, 61),
+    rgb(240, 200, 40),
+    rgb(250, 204, 20)
+  );
+  transform: scale(0.95); /* Equivalent to Tailwind's scale-110 */
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+.full-width-border {
+  position: relative;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
+.full-width-border::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  border-bottom: 1px solid #343541;
+}
+
+.gradient-hover2:hover {
+  background: linear-gradient(
+    0.3turn,
+    blue,
+    blue,
+    blue,
+    rgb(67, 51, 154),
+    rgb(48, 26, 173),
+    rgb(64, 65, 132),
+    rgb(143, 67, 67),
+    red,
+    rgb(157, 49, 49),
+    rgb(198, 28, 28),
+    red,
+    red
+  );
+  transform: scale(1.1);
+}
+
+.icon-resize {
+  transform: scale(1); /* default scale */
+  transition: transform 300ms ease-in-out;
+}
+
+@media (max-width: 768px) {
+  .icon-resize {
+    transform: scale(0.8);
   }
 }
